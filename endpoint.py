@@ -1,4 +1,3 @@
-from selenium import webdriver
 import os
 import sys
 import requests
@@ -104,7 +103,6 @@ if "driver" not in dir(): # Execute as script from command line
     elif cmd == "deleteSchema": # deleteSchema <schema name>
         auth['schemaName'] = sys.argv[2]
         deleteCustomSchema(auth)
-
 
 
 else: # Assume running within AppDynamics Synthetic Agent Framework
