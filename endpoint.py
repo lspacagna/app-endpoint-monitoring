@@ -3,10 +3,7 @@ import os
 import sys
 import requests
 import datetime
-import random
 import json
-import socket
-socket.gethostbyname("")
 
 url = "https://postman-echo.com/post"
 schema = { "schema": {  "testid":           "integer",
@@ -15,7 +12,6 @@ schema = { "schema": {  "testid":           "integer",
                         "response_time":    "integer",
                         "url":              "string",
                         "mesid":            "string" } }
-
 
 def createHeaders(auth):
     return { "X-Events-API-AccountName": auth['globalAccountName'],
@@ -48,7 +44,13 @@ def postCustomAnalytics(auth, data):
     print("POSTing to AppDynamics...")
 
     url = auth['analyticsUrl'] + "/events/publish/" + auth['schemaName']
-    print(url)
+    r = requests.post( auth['analyticsUrl'] + "/events/publish/" + auth['schemaName'],
+                       data=json.dumps( data ),
+                       headers=createHeaders( auth ))
+    print( "Post metrics ", r.status_code, auth['schemaName'] )
+    if r.status_code != 200:
+        print( r.text )
+        print( auth )
 
 def collateData(statusCode, responseTime, testedUrl):
     data = [ {  "status_code":      statusCode,
