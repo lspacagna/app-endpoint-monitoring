@@ -31,4 +31,8 @@ python3 endpoint.py createSchema <schema-name>
 python3 endpoint.py runTest1 <schema-name>
 ```
 
-6. The results of the test will be recorded in the custom analytics schema created in step 4. 
+6. The results of the test will be recorded in the custom analytics schema created in step 4.
+
+## Running in AppDynamics Synthetics
+
+When running within AppDynamics synthetics the results of the test will not appear in the synthetics part of the product. The results will be added to the synthetics schema created when running locally.
